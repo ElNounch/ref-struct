@@ -44,6 +44,17 @@ describe('Struct', function () {
     assert.equal(100, ss.last)
   })
 
+  it('should accept C-style initialization', function () {
+    var AnotherStruct = Struct({
+        'a_one': ref.types.byte
+      , 'a_two':  ref.types.byte
+    })
+
+    var as = new AnotherStruct([ 25, 75 ])
+    assert.equal(25, as.a_one)
+    assert.equal(75, as.a_two)
+  })
+
   it('should work in a more complex case', function () {
     var MegaStruct = Struct({
         'byteVal': ref.types.byte
