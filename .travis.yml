@@ -1,6 +1,30 @@
 language: node_js
 node_js:
-  - "0.8"
-  - "0.10"
-  - "0.11"
+  - "stable"
+  - "iojs"
+  - "unstable"
   - "0.12"
+  - "0.10"
+  - "0.8"
+  - "iojs-v1"
+  - "iojs-v1.8.2"
+  - "iojs-v1.0.4"
+
+matrix:
+  allow_failures:
+    - node_js: "unstable"
+    - node_js: "iojs"
+
+install:
+  - PATH="`npm bin`:`npm bin -g`:$PATH"
+  # Update npm itself, if pre-version 2.x
+  - if [[ "`npm --version`" =~ ^1\. ]]; then npm install -g npm@2.11; fi
+  # Install with dependencies
+  - npm install
+
+script:
+  # Output useful info for debugging
+  - node --version
+  - npm --version
+  # Run tests
+  - npm test
