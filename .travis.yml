@@ -1,24 +1,23 @@
 language: node_js
+
+# Test against these versions of Node.js and io.js
 node_js:
-  - "stable"
-  - "iojs"
-  - "unstable"
+  - "stable"    # Node stable
+  - "iojs"      # io.js latest
+  - "unstable"  # Node unstable
   - "0.12"
   - "0.10"
   - "0.8"
   - "iojs-v1"
-  - "iojs-v1.8.2"
-  - "iojs-v1.0.4"
 
 matrix:
   allow_failures:
-    - node_js: "unstable"
-    - node_js: "iojs"
+    - node_js: "unstable"  # Node unstable
+    - node_js: "iojs"      # io.js latest
 
 install:
   - PATH="`npm bin`:`npm bin -g`:$PATH"
-  # Update npm itself, if pre-version 2.x
-  - if [[ "`npm --version`" =~ ^1\. ]]; then npm install -g npm@2.11; fi
+  - if [[ "`node --version`" =~ ^v0\.8\. ]]; then npm install -g npm@1.4.28 ; fi
   # Install with dependencies
   - npm install
 
